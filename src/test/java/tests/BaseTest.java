@@ -12,11 +12,4 @@ public class BaseTest {
         Configuration.browserSize = "1920x1080";
         Configuration.browserPosition = "0x0";
     }
-
-    @AfterAll
-    static void afterAllTest() throws InterruptedException {
-        Configuration.holdBrowserOpen = true;
-        Thread.sleep(2000);
-        Configuration.holdBrowserOpen = false;
-    }
 }
