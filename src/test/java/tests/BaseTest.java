@@ -8,7 +8,7 @@ public class BaseTest {
 
     @BeforeAll
     static void beforeAllTests() {
-        open("https://github.com/selenide");
+        Configuration.baseUrl = "https://github.com/selenide";
         Configuration.browserSize = "1920x1080";
         Configuration.browserPosition = "0x0";
     }
