@@ -1,10 +1,7 @@
 package tests;
 
-import com.codeborne.selenide.CollectionCondition;
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import com.codeborne.selenide.*;
+import org.junit.jupiter.api.*;
 
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
@@ -12,14 +9,18 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class SearchOnGithubTest extends BaseTest {
     private SelenideElement wiki = $("#wiki-tab"),
-                            searchLine = $("input.js-filterable-field"),
-                            searchResult = $("[data-filterable-type=\"substring\"]"),
-                            markdownBody = $(".markdown-body");
+            searchLine = $("input.js-filterable-field"),
+            searchResult = $("[data-filterable-type=\"substring\"]"),
+            markdownBody = $(".markdown-body");
     private ElementsCollection searchTag = $$("h4");
+    private String searchInWikiSearchLine = "Soft",
+            searchInWikiSearchResults = "SoftAssertions",
+            searchText = "JUnit5",
+            searchCode = "@ExtendWith({SoftAssertsExtension.class})";
 
-    @CsvSource(value = "Soft, SoftAssertions, JUnit5, @ExtendWith({SoftAssertsExtension.class})")
-    @ParameterizedTest(name = "На странице SoftAssertions присутствуют {2} и его код {3}...")
-    void searchingForExampleCodeJUnit(String searchInWikiSearchLine, String searchInWikiSearchResults, String searchText, String searchCode) {
+    @Test
+    @DisplayName("Страница SoftAssertions содержит заголовок и код с JUnit5")
+    void searchingForExampleCodeJUnit() {
         open("/selenide");
         wiki.click();
         searchLine.setValue(searchInWikiSearchLine).pressEnter();
